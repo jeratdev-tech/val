@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Valentine's Love Notes</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(45deg, #f84c4c, #bb5050);
+        font-family: "Arial", sans-serif;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        max-width: 80%;
+        transition: opacity 1s ease-in-out;
+      }
+
+      h1 {
+        color: #c44569;
+        margin-bottom: 1rem;
+      }
+
+      #loveNote {
+        font-size: 1.5rem;
+        color: #786fa6;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #f31c2e;
+        transform: rotate(-45deg);
+        animation: heartbeat 1.2s infinite;
+      }
+
+      .heart::before,
+      .heart::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #ff4757;
+        border-radius: 50%;
+        margin-top: 100px;
+      }
+
+      .heart::before {
+        top: -10px;
+        left: 0;
+      }
+
+      .heart::after {
+        left: 10px;
+        top: 0px;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: rotate(-45deg) scale(1);
+        }
+        20% {
+          transform: rotate(-45deg) scale(1.2);
+        }
+        40% {
+          transform: rotate(-45deg) scale(1);
+        }
+        60% {
+          transform: rotate(-45deg) scale(1.2);
+        }
+        100% {
+          transform: rotate(-45deg) scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>💝 Valentine's Message 💝</h1>
+      <h3>Dr. Rebecca this for you only</h3>
+      <div id="loveNote"></div>
+    </div>
+
+    <script>
+      const loveNotes = [
+        "You make my heart skip a beat every time I see you!",
+        "Your smile lights up my world brighter than the sun!",
+        "I cherish every moment we spend together!",
+        "You're the missing piece to my puzzle!",
+        "My love for you grows stronger every day!",
+        "You're my today and all of my tomorrows!",
+        "In your arms is where I belong!",
+        "Your love is the best thing that ever happened to me!",
+        "I fall for you more every single day!",
+        "You're my forever and always!",
+      ];
+
+      const loveNoteElement = document.getElementById("loveNote");
+      let currentNoteIndex = 0;
+
+      function showRandomLoveNote() {
+        // Fade out effect
+        loveNoteElement.style.opacity = 0;
+
+        setTimeout(() => {
+          const randomIndex = Math.floor(Math.random() * loveNotes.length);
+          loveNoteElement.textContent = loveNotes[randomIndex];
+          // Fade in effect
+          loveNoteElement.style.opacity = 1;
+        }, 500);
+      }
+
+      // Show first note immediately
+      showRandomLoveNote();
+
+      // Change note every 2 minutes (120000 milliseconds)
+      setInterval(showRandomLoveNote, 3000);
+
+      // Create floating hearts
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 2 + 1 + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+
+      // Create hearts periodically
+      setInterval(createHeart, 300);
+    </script>
+  </body>
+</html>
